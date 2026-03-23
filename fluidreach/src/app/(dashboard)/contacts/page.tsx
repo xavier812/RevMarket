@@ -92,6 +92,7 @@ export default function ContactsPage() {
 
   return (
     <div className="p-8">
+      {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Contacts</h1>
@@ -105,6 +106,7 @@ export default function ContactsPage() {
         </button>
       </div>
 
+      {/* Add Contact Form */}
       {showForm && (
         <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6 shadow-sm">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">New Contact</h2>
@@ -119,15 +121,22 @@ export default function ContactsPage() {
                 placeholder="John Smith"
               />
             </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-              <input
-                value={form.phone}
-                onChange={e => setForm({...form, phone: e.target.value})}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="+91 98765 43210"
-              />
+              <div className="flex">
+                <span className="inline-flex items-center px-3 py-2 border border-r-0 border-gray-300 rounded-l-lg bg-gray-50 text-gray-600 text-sm font-medium">
+                  +91
+                </span>
+                <input
+                  value={form.phone.replace('+91', '')}
+                  onChange={e => setForm({...form, phone: '+91' + e.target.value})}
+                  className="flex-1 border border-gray-300 rounded-r-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="98765 43210"
+                />
+              </div>
             </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
               <input
@@ -138,6 +147,7 @@ export default function ContactsPage() {
                 placeholder="john@example.com"
               />
             </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Network Type *</label>
               <select
@@ -150,6 +160,7 @@ export default function ContactsPage() {
                 ))}
               </select>
             </div>
+
             <div className="col-span-2 flex gap-3">
               <button
                 type="submit"
@@ -170,6 +181,7 @@ export default function ContactsPage() {
         </div>
       )}
 
+      {/* Search + Filter Bar */}
       <div className="flex gap-3 mb-4">
         <input
           value={search}
@@ -189,6 +201,7 @@ export default function ContactsPage() {
         </select>
       </div>
 
+      {/* Contacts Table */}
       <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
         {loading ? (
           <div className="p-8 text-center text-gray-500 text-sm">Loading contacts...</div>
