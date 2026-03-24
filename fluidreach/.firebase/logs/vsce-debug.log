@@ -1,0 +1,28 @@
+[debug] [2026-03-24T05:38:31.692Z] [Firebase Plugin] Activating Firebase extension.
+[info] [Firebase Plugin] Checked firebase-tools, is up to date!
+[debug] [2026-03-24T05:38:33.292Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-03-24T05:38:33.305Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-24T05:38:33.306Z] > authorizing via signed-in user (xavier.revergon@gmail.com)
+[debug] [2026-03-24T05:38:33.308Z] Checked if tokens are valid: true, expires at: 1774331629234
+[debug] [2026-03-24T05:38:33.308Z] Checked if tokens are valid: true, expires at: 1774331629234
+[debug] [2026-03-24T05:38:33.309Z] [Firebase Plugin] User found:  xavier.revergon@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-03-24T05:38:33.310Z] Checked if tokens are valid: true, expires at: 1774331629234
+[debug] [2026-03-24T05:38:33.311Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-03-24T05:38:33.318Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[info] [Firebase Plugin] Starting Data Connect toolkit (version 3.2.1) on port 50001
+[debug] [2026-03-24T05:38:33.585Z] 'fdc build' failed with error: Unable to build your Data Connect schema and connectors (exit code 1): E0324 11:08:33.579627   13420 cmd.go:43] Error loading data connect config: could not find dataconnect.yaml in `c:\Users\rever\Desktop\Whatsapp\fluidreach\dataconnect`
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"'fdc build' failed with error: Unable to build your Data Connect schema and connectors (exit code 1): E0324 11:08:33.579627   13420 cmd.go:43] Error loading data connect config: could not find dataconnect.yaml in `c:\\Users\\rever\\Desktop\\Whatsapp\\fluidreach\\dataconnect`\n"}}
+[debug] [2026-03-24T05:38:33.585Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-03-24T05:38:33.586Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-03-24T05:38:33.586Z] Starting Data Connect Emulator with command {"binary":"C:\\Users\\rever\\.cache\\firebase\\emulators\\dataconnect-emulator-3.2.1.exe","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=c:\\Users\\rever\\Desktop\\Whatsapp\\fluidreach\\dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"C:\\\\Users\\\\rever\\\\.cache\\\\firebase\\\\emulators\\\\dataconnect-emulator-3.2.1.exe\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=c:\\\\Users\\\\rever\\\\Desktop\\\\Whatsapp\\\\fluidreach\\\\dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to \u001b[1mdataconnect-debug.log\u001b[22m"}}
+[debug] [2026-03-24T05:38:33.629Z] E0324 11:08:33.629015   10756 dev.go:83] Failed to load initial config from "c:\\Users\\rever\\Desktop\\Whatsapp\\fluidreach\\dataconnect": could not find dataconnect.yaml in `c:\Users\rever\Desktop\Whatsapp\fluidreach\dataconnect`
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0324 11:08:33.629015   10756 dev.go:83] Failed to load initial config from \"c:\\\\Users\\\\rever\\\\Desktop\\\\Whatsapp\\\\fluidreach\\\\dataconnect\": could not find dataconnect.yaml in `c:\\Users\\rever\\Desktop\\Whatsapp\\fluidreach\\dataconnect`\n"}}
+[debug] [2026-03-24T05:38:33.630Z] E0324 11:08:33.630055   10756 watch.go:116] watchAllDir unable to walk dir `c:\Users\rever\Desktop\Whatsapp\fluidreach\dataconnect`: CreateFile c:\Users\rever\Desktop\Whatsapp\fluidreach\dataconnect: The system cannot find the file specified.
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0324 11:08:33.630055   10756 watch.go:116] watchAllDir unable to walk dir `c:\\Users\\rever\\Desktop\\Whatsapp\\fluidreach\\dataconnect`: CreateFile c:\\Users\\rever\\Desktop\\Whatsapp\\fluidreach\\dataconnect: The system cannot find the file specified.\n"}}
+[debug] [2026-03-24T05:38:33.642Z] I0324 11:08:33.642119   10756 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0324 11:08:33.642119   10756 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[error] [Firebase Plugin] error:  {}
+[debug] [2026-03-24T05:38:34.210Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-03-24T05:38:34.210Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
