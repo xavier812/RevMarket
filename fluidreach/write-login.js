@@ -1,4 +1,6 @@
-'use client'
+const fs = require('fs')
+
+const content = `'use client'
 import { useState } from 'react'
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore'
@@ -133,4 +135,7 @@ export default function LoginPage() {
       </p>
     </div>
   )
-}
+}`
+
+fs.writeFileSync('src/app/(auth)/login/page.tsx', content)
+console.log('Login page written successfully!')
