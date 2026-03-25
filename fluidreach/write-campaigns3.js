@@ -1,6 +1,8 @@
-'use client'
+const fs = require('fs')
+
+const content = `'use client'
 import { useState, useEffect } from 'react'
-import { collection, addDoc, getDocs, deleteDoc, doc, serverTimestamp } from 'firebase/firestore'
+import { collection, addDoc, getDocs, serverTimestamp } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { useAuth } from '@/lib/auth-context'
 import { useRouter } from 'next/navigation'
@@ -68,13 +70,6 @@ export default function CampaignsPage() {
     } catch (e) { console.error(e) }
   }
 
-  async function deleteBroadcast(id: string) {
-    if (!workspaceId) return
-    if (!confirm('Delete this broadcast from history?')) return
-    await deleteDoc(doc(db, 'workspaces', workspaceId, 'campaigns', id))
-    loadBroadcasts()
-  }
-
   function filterContacts() {
     let result = allContacts
     if (form.network !== 'All Contacts') result = result.filter(c => c.tags?.includes(form.network))
@@ -112,13 +107,16 @@ export default function CampaignsPage() {
     if (!workspaceId) return
     if (selectedIds.size === 0) { alert('Please select at least one contact.'); return }
     setSaving(true)
+
     const selectedContacts = allContacts.filter(c => selectedIds.has(c.id))
     let sentCount = 0
     let failedCount = 0
-    setSendProgress({ current: 0, total: selectedContacts.length, status: 'Starting...' })
+
+    setSendProgress({ current: 0, total: selectedContacts.length, status: 'Sending...' })
+
     for (let i = 0; i < selectedContacts.length; i++) {
       const contact = selectedContacts[i]
-      setSendProgress({ current: i + 1, total: selectedContacts.length, status: 'Sending to ' + contact.name + '...' })
+      setSendProgress({ current: i + 1, total: selectedContacts.length, status: "Sending to " + contact.name + "..." })
       try {
         const personalizedMessage = form.message.replace(/{name}/g, contact.name)
         const res = await fetch('/api/send-whatsapp', {
@@ -131,22 +129,24 @@ export default function CampaignsPage() {
       } catch (e) { failedCount++ }
       await new Promise(r => setTimeout(r, 500))
     }
+
     try {
       await addDoc(collection(db, 'workspaces', workspaceId, 'campaigns'), {
-        name: form.name,
-        message: form.message,
-        audience: form.network,
-        recipientIds: Array.from(selectedIds),
+        name:           form.name,
+        message:        form.message,
+        audience:       form.network,
+        recipientIds:   Array.from(selectedIds),
         recipientCount: selectedIds.size,
         sentCount,
         failedCount,
-        recipients: selectedContacts.map(c => ({ id: c.id, name: c.name, phone: c.phone })),
-        mediaType: mediaType || null,
-        mediaName: selectedFile?.name || null,
-        status: failedCount === 0 ? 'sent' : sentCount === 0 ? 'failed' : 'partial',
-        createdAt: serverTimestamp(),
+        recipients:     selectedContacts.map(c => ({ id: c.id, name: c.name, phone: c.phone })),
+        mediaType:      mediaType || null,
+        mediaName:      selectedFile?.name || null,
+        status:         failedCount === 0 ? 'sent' : sentCount === 0 ? 'failed' : 'partial',
+        createdAt:      serverTimestamp(),
       })
     } catch (e) { console.error(e) }
+
     setSendProgress({ current: 0, total: 0, status: '' })
     setForm({ name: '', message: '', network: 'All Contacts' })
     setSelectedIds(new Set())
@@ -154,7 +154,7 @@ export default function CampaignsPage() {
     setShowForm(false)
     setSaving(false)
     loadBroadcasts()
-    alert('Broadcast complete! Sent: ' + sentCount + ' | Failed: ' + failedCount)
+    alert("Broadcast complete! Sent: " + sentCount + " | Failed: " + failedCount)
   }
 
   const tagColors: Record<string, string> = {
@@ -306,7 +306,7 @@ export default function CampaignsPage() {
             <div className="flex gap-3 pt-2">
               <button type="submit" disabled={saving || selectedIds.size === 0}
                 className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:text-gray-500 text-white px-6 py-2 rounded-lg text-sm font-medium">
-                {saving ? '⏳ Sending...' : '📣 Send to ' + selectedIds.size + ' contacts'}
+                {saving ? '⏳ Sending...' : "📣 Send to " + selectedIds.size + " contacts"}
               </button>
               <button type="button" onClick={() => { setShowForm(false); setSelectedIds(new Set()); removeFile() }}
                 className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium">
@@ -339,7 +339,6 @@ export default function CampaignsPage() {
                 <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase">Failed</th>
                 <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase">Status</th>
                 <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase">Date</th>
-                <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase"></th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
@@ -359,9 +358,6 @@ export default function CampaignsPage() {
                     <span className={"text-xs px-2 py-1 rounded-full font-medium " + (statusColors[b.status] || 'bg-gray-100 text-gray-600')}>{b.status}</span>
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-500">{b.createdAt?.toDate?.()?.toLocaleDateString() || '-'}</td>
-                  <td className="px-4 py-3">
-                    <button onClick={() => deleteBroadcast(b.id)} className="text-red-500 hover:text-red-700 text-xs font-medium">Delete</button>
-                  </td>
                 </tr>
               ))}
             </tbody>
@@ -370,4 +366,7 @@ export default function CampaignsPage() {
       </div>
     </div>
   )
-}
+}`
+
+fs.writeFileSync('src/app/(dashboard)/campaigns/page.tsx', content)
+console.log('Done!')
