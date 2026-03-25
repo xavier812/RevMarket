@@ -1,4 +1,6 @@
-'use client'
+const fs = require('fs')
+
+const content = `'use client'
 import { useState, useEffect } from 'react'
 import { collection, addDoc, getDocs, deleteDoc, doc, serverTimestamp } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
@@ -370,4 +372,7 @@ export default function CampaignsPage() {
       </div>
     </div>
   )
-}
+}`
+
+fs.writeFileSync('src/app/(dashboard)/campaigns/page.tsx', content)
+console.log('Done!')

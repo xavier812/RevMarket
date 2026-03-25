@@ -1,4 +1,6 @@
-'use client'
+const fs = require('fs')
+
+const content = `'use client'
 import { useState, useEffect } from 'react'
 import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
@@ -252,4 +254,7 @@ export default function AutomationsPage() {
       </div>
     </div>
   )
-}
+}`
+
+fs.writeFileSync('src/app/(dashboard)/automations/page.tsx', content)
+console.log('Done!')
